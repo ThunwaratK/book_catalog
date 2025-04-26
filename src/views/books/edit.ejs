@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fef9f4;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(2px);
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #5a3825;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a2e1f;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d6ccc2;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .btn-submit,
+        .btn-cancel {
+            background-color: #8d6748;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-cancel {
+            background-color: #aaa;
+        }
+
+        .btn-submit:hover {
+            background-color: #6d4c35;
+        }
+
+        .btn-cancel:hover {
+            background-color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📘 Edit Book</h2>
+
+        <form action="/api/books/edit/<%= book.book_id %>" method="POST">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="<%= book.title %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" value="<%= book.author %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="Reading" <%= book.status === 'Reading' ? 'selected' : '' %>>Reading</option>
+                    <option value="Completed" <%= book.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                    <option value="Planning" <%= book.status === 'Planning' ? 'selected' : '' %>>Planning to Read</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="note">Notes (optional):</label>
+                <textarea id="note" name="note" rows="4"><%= book.note %></textarea>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Update Book</button>
+                <a href="/api/books" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

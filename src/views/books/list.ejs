@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Book Catalog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fef9f4;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1400&q=80');
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(2px);
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #5a3825;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .book-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .btn-add, .btn-logout, .btn-edit, .btn-delete {
+            background-color: #8d6748;
+            color: #fff;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-add:hover, .btn-logout:hover, .btn-edit:hover, .btn-delete:hover {
+            background-color: #6d4c35;
+        }
+
+        .book-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .book-table th,
+        .book-table td {
+            border: 1px solid #e2d6c2;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .book-table th {
+            background-color: #f5e9dc;
+            color: #5a3825;
+        }
+
+        .status-reading {
+            color: #31708f;
+            font-weight: bold;
+        }
+
+        .status-completed {
+            color: #3c763d;
+            font-weight: bold;
+        }
+
+        .status-wishlist {
+            color: #a94442;
+            font-weight: bold;
+        }
+
+        .actions a {
+            margin-right: 10px;
+        }
+
+        .no-books {
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 My Book Catalog</h1>
+        
+        <div class="book-controls">
+            <a href="/api/books/add" class="btn-add">➕ Add New Book</a>
+            <a href="/auth/logout" class="btn-logout">🚪 Logout</a>
+        </div>
+        
+        <% if (books && books.length > 0) { %>
+            <table class="book-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% books.forEach(function(book) { %>
+                        <tr>
+                            <td><%= book.title %></td>
+                            <td><%= book.author %></td>
+                            <td>
+                                <span class="status-<%= book.status.toLowerCase() %>">
+                                    <%= book.status %>
+                                </span>
+                            </td>
+                            <td class="actions">
+                                <a href="/api/books/edit/<%= book.book_id %>" class="btn-edit">Edit</a>
+                                <a href="/api/books/delete/<%= book.book_id %>" class="btn-delete" 
+                                   onclick="return confirm('Are you sure you want to delete this book?')">Delete</a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <div class="no-books">
+                <p>📖 You haven't added any books yet. Start building your collection!</p>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

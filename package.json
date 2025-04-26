@@ -1,0 +1,27 @@
+{
+  "name": "projectdb",
+  "version": "1.0.0",
+  "description": "A web application for managing book data with Cassandra as the database.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "keywords": [
+    "books",
+    "cassandra",
+    "nodejs",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cassandra-driver": "^4.6.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.18.1",
+    "nodemon": "^2.0.7",
+    "uuid": "^11.1.0"
+  }
+}

@@ -1,0 +1,13 @@
+
+services:
+  cassandra:
+    image: cassandra:latest
+    container_name: Database-project
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=database-project
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin1234
+    volumes:
+      - cassandra-data:/var/lib/cassandra

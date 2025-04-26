@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Book Catalog</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Personal Book Catalog</h1>
+        <nav>
+            <ul>
+                <% if (user) { %>
+                    <li><a href="/api/books">My Books</a></li>
+                    <li><a href="/api/books/add">Add Book</a></li>
+                    <li class="user-info">
+                        Welcome, <%= user.username %> | 
+                        <a href="/auth/logout" class="logout-link">Logout</a>
+                    </li>
+                <% } else { %>
+                    <li><a href="/auth/login">Login</a></li>
+                    <li><a href="/auth/register">Register</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <%- body %>
+    </main>
+    <footer>
+        <p>&copy; Personal Book Catalog</p>
+    </footer>
+    <script src="/js/main.js"></script>
+</body>
+</html>
